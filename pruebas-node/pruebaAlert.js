@@ -14,8 +14,8 @@ function obtenerEstudiantes(NombreFicha) {
             }
         }, 1000); 
     });
-}
-function primeraEtapa() {
+}function primeraEtapa() {
+    let continuar = true; 
     do {
         const instructorPreGunta = "Ultimamente hemos tenido muchas deserciones";
         const preguntaEstudiante = "¿Cuántas personas quedan en:";
@@ -25,17 +25,17 @@ function primeraEtapa() {
         
         if (respuestaFicha.toLowerCase() === 'irse') {
             alert("Bye bye");
-            break;
+            continuar = false;
+        } else {
+            obtenerEstudiantes(respuestaFicha)
+                .then((respuesta) => {
+                    alert(`Instructor Jhon: ${respuesta}`);
+                })
+                .catch((error) => {
+                    alert(`Instructor Jhon: ${error}`);
+                });
         }
-        
-        obtenerEstudiantes(respuestaFicha)
-            .then((respuesta) => {
-                alert(`Instructor Jhon: ${respuesta}`);
-            })
-            .catch((error) => {
-                alert(`Instructor Jhon: ${error}`);
-            });
-    } while (true);
+    } while (continuar); // Seguimos ejecutando mientras la variable continuar sea verdadera
 }
 
 primeraEtapa();
